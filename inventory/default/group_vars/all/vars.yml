@@ -1,0 +1,9 @@
+---
+# global
+ansible_ssh_password: "{{ vault_ssh_password }}"
+ansible_become_password: "{{ vault_sudo_password }}"
+ansible_python_interpreter: "/usr/bin/python3"
+
+# mariadb
+mariadb_root_password: "{{ vault_mariadb_root_password }}"
+...

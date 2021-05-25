@@ -1,0 +1,22 @@
+osod-0 ansible_host=192.168.21.170 ansible_port=22 ansible_user=pengrix ansible_conntion=local
+osod-1 ansible_host=192.168.21.171 ansible_port=22 ansible_user=pengrix
+osod-2 ansible_host=192.168.21.172 ansible_port=22 ansible_user=pengrix
+osod-3 ansible_host=192.168.21.173 ansible_port=22 ansible_user=pengrix
+osod-4 ansible_host=192.168.21.174 ansible_port=22 ansible_user=pengrix
+osod-5 ansible_host=192.168.21.175 ansible_port=22 ansible_user=pengrix
+
+[controller]
+osod-[0:2]
+
+[mariadb]
+osod-[0:2]
+
+[rabbitmq]
+osod-[0:2]
+
+[compute]
+osod-[3:5]
+
+[nodes:children]
+controller
+compute

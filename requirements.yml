@@ -1,0 +1,11 @@
+# from github
+- src: https://github.com/iorchard/pbos.ntp
+  version: main
+- src: https://github.com/iorchard/pbos.mariadb
+  version: main
+- src: https://github.com/iorchard/pbos.rabbitmq
+  version: main
+- src: https://github.com/iorchard/pbos.keepalived
+  version: main
+- src: https://github.com/iorchard/pbos.memcached
+  version: main

@@ -13,4 +13,10 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.rabbitmq, tags: rabbitmq}
+
+- hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.keepalived, tags: keepalived}
+    - {role: pbos.memcached, tags: memcached}
 ...

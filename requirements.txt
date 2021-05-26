@@ -1,7 +1,0 @@
-# from github
-- src: https://github.com/iorchard/iorchard.ntp
-  version: main
-- src: https://github.com/iorchard/iorchard.mariadb
-  version: main
-- src: https://github.com/iorchard/iorchard.rabbitmq
-  version: main

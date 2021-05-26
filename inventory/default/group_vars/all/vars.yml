@@ -6,4 +6,11 @@ ansible_python_interpreter: "/usr/bin/python3"
 
 # mariadb
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
+
+# rabbitmq
+rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
+
+# keepalived
+keepalived_interface: "eth1"
+keepalived_vip: "192.168.21.169"
 ...

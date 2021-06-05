@@ -32,7 +32,7 @@ Install ansible.::
 
    $ python -m pip install -U pip
    $ python -m pip install wheel
-   $ python -m pip install ansible pymysql
+   $ python -m pip install ansible pymysql openstacksdk
 
 Prepare
 ---------

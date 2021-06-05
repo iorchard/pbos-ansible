@@ -9,3 +9,5 @@
   version: main
 - src: https://github.com/iorchard/pbos.memcached
   version: main
+- src: https://github.com/iorchard/pbos.keystone
+  version: main

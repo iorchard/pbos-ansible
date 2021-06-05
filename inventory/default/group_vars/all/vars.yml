@@ -1,11 +1,14 @@
 ---
 # global
-ansible_ssh_password: "{{ vault_ssh_password }}"
+#ansible_ssh_password: "{{ vault_ssh_password }}"
+ansible_password: "{{ vault_ssh_password }}"
 ansible_become_password: "{{ vault_sudo_password }}"
 ansible_python_interpreter: "/usr/bin/python3"
 
 # mariadb
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
+mariadb_keystone_password: "{{ vault_mariadb_keystone_password }}"
+
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
@@ -13,4 +16,12 @@ rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
 # keepalived
 keepalived_interface: "eth1"
 keepalived_vip: "192.168.21.169"
+
+# openstack common
+openstack_mariadb_acl_cidr:
+  - "localhost"
+  - "192.168.21.0/255.255.255.0"
+
+openstack_release: "wallaby"
+openstack_admin_password: "{{ vault_openstack_admin_password }}"
 ...

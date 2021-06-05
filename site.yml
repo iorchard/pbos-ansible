@@ -19,4 +19,9 @@
   roles:
     - {role: pbos.keepalived, tags: keepalived}
     - {role: pbos.memcached, tags: memcached}
+
+- hosts: keystone
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.keystone, tags: keystone}
 ...

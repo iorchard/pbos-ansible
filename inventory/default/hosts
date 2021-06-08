@@ -17,6 +17,12 @@ osod-[0:2]
 [keystone]
 osod-[0:2]
 
+[glance]
+osod-[0:2]
+
+[placement]
+osod-[0:2]
+
 [compute]
 osod-[3:5]
 

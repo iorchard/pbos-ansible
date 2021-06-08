@@ -4,6 +4,13 @@
   roles:
     - {role: pbos.ntp, tags: ntp}
 
+- hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.keepalived, tags: keepalived}
+    - {role: pbos.haproxy, tags: haproxy}
+    - {role: pbos.memcached, tags: memcached}
+
 - hosts: mariadb
   any_errors_fatal: true
   roles:
@@ -14,14 +21,18 @@
   roles:
     - {role: pbos.rabbitmq, tags: rabbitmq}
 
-- hosts: controller
-  any_errors_fatal: true
-  roles:
-    - {role: pbos.keepalived, tags: keepalived}
-    - {role: pbos.memcached, tags: memcached}
-
 - hosts: keystone
   any_errors_fatal: true
   roles:
     - {role: pbos.keystone, tags: keystone}
+
+- hosts: glance
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.glance, tags: glance}
+
+- hosts: placement
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.placement, tags: placement}
 ...

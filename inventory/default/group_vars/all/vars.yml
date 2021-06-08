@@ -5,10 +5,11 @@ ansible_password: "{{ vault_ssh_password }}"
 ansible_become_password: "{{ vault_sudo_password }}"
 ansible_python_interpreter: "/usr/bin/python3"
 
-# mariadb
+# mariadb / openstack password
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
 mariadb_keystone_password: "{{ vault_mariadb_keystone_password }}"
-
+glance_password: "{{ vault_glance_password }}"
+placement_password: "{{ vault_placement_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"

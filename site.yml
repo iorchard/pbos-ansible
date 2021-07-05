@@ -35,4 +35,24 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.placement, tags: placement}
+
+- hosts: openstack
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.neutron, tags: neutron}
+
+- hosts: cinder
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.cinder, tags: cinder}
+
+- hosts: openstack
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.nova, tags: nova}
+
+- hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.horizon, tags: horizon}
 ...

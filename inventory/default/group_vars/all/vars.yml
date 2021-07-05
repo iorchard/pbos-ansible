@@ -7,9 +7,12 @@ ansible_python_interpreter: "/usr/bin/python3"
 
 # mariadb / openstack password
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
-mariadb_keystone_password: "{{ vault_mariadb_keystone_password }}"
+keystone_password: "{{ vault_keystone_password }}"
 glance_password: "{{ vault_glance_password }}"
 placement_password: "{{ vault_placement_password }}"
+neutron_password: "{{ vault_neutron_password }}"
+cinder_password: "{{ vault_cinder_password }}"
+nova_password: "{{ vault_nova_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
@@ -25,4 +28,12 @@ openstack_mariadb_acl_cidr:
 
 openstack_release: "wallaby"
 openstack_admin_password: "{{ vault_openstack_admin_password }}"
+
+# neutron
+metadata_secret: "{{ vault_metadata_secret }}"
+provider_interface: "eth2"
+overlay_interface: "eth3"
+
+# ceph rbd secret
+rbd_secret: "{{ vault_rbd_secret }}"
 ...

@@ -8,6 +8,9 @@ osod-5 ansible_host=192.168.21.175 ansible_port=22 ansible_user=pengrix
 [controller]
 osod-[0:2]
 
+[compute]
+osod-[3:5]
+
 [mariadb]
 osod-[0:2]
 
@@ -23,9 +26,9 @@ osod-[0:2]
 [placement]
 osod-[0:2]
 
-[compute]
-osod-[3:5]
+[cinder]
+osod-[0:2]
 
-[nodes:children]
+[openstack:children]
 controller
 compute

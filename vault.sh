@@ -17,6 +17,8 @@ METADATA_SECRET=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 CINDER_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 RBD_SECRET=$(cat /proc/sys/kernel/random/uuid)
 NOVA_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
+BARBICAN_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
+BARBICAN_KEK=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 32)
 
 echo "---" > $VAULTFILE
 echo "vault_ssh_password: '$SSHPASS'" >> $VAULTFILE
@@ -32,6 +34,8 @@ echo "vault_metadata_secret: '$METADATA_SECRET'" >> $VAULTFILE
 echo "vault_cinder_password: '$CINDER_PASS'" >> $VAULTFILE
 echo "vault_rbd_secret: '$RBD_SECRET'" >> $VAULTFILE
 echo "vault_nova_password: '$NOVA_PASS'" >> $VAULTFILE
+echo "vault_barbican_password: '$BARBICAN_PASS'" >> $VAULTFILE
+echo "vault_barbican_kek: '$BARBICAN_KEK'" >> $VAULTFILE
 echo -n "..." >> $VAULTFILE
 head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8 > .vaultpass
 ansible-vault encrypt $VAULTFILE

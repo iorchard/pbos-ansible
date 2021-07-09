@@ -55,4 +55,9 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.horizon, tags: horizon}
+
+- hosts: barbican
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.barbican, tags: barbican}
 ...

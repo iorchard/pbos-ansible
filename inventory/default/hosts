@@ -29,6 +29,9 @@ osod-[0:2]
 [cinder]
 osod-[0:2]
 
+[barbican]
+osod-0
+
 [openstack:children]
 controller
 compute

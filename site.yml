@@ -1,62 +1,79 @@
 ---
-- hosts: all
+- name: Deploy time service (ntp)
+  hosts: all
   any_errors_fatal: true
   roles:
     - {role: pbos.ntp, tags: ntp}
 
-- hosts: controller
+- name: Deploy HA service (keepalived/haproxy)
+  hosts: controller
   any_errors_fatal: true
   roles:
     - {role: pbos.keepalived, tags: keepalived}
     - {role: pbos.haproxy, tags: haproxy}
+
+- name: Deploy cache service (memcached)
+  hosts: controller
+  any_errors_fatal: true
+  roles:
     - {role: pbos.memcached, tags: memcached}
 
-- hosts: mariadb
+- name: Deploy database service (mariadb galera cluster)
+  hosts: mariadb
   any_errors_fatal: true
   roles:
     - {role: pbos.mariadb, tags: mariadb}
 
-- hosts: rabbitmq
+- name: Deploy messaging service (rabbitmq)
+  hosts: rabbitmq
   any_errors_fatal: true
   roles:
     - {role: pbos.rabbitmq, tags: rabbitmq}
 
-- hosts: keystone
+- name: Deploy openstack identity service (keystone)
+  hosts: keystone
   any_errors_fatal: true
   roles:
     - {role: pbos.keystone, tags: keystone}
 
-- hosts: glance
+- name: Deploy openstack image service (glance)
+  hosts: glance
   any_errors_fatal: true
   roles:
     - {role: pbos.glance, tags: glance}
 
-- hosts: placement
+- name: Deploy openstack resource service (placement)
+  hosts: placement
   any_errors_fatal: true
   roles:
     - {role: pbos.placement, tags: placement}
 
-- hosts: openstack
+- name: Deploy openstack network service (neutron)
+  hosts: openstack
   any_errors_fatal: true
   roles:
     - {role: pbos.neutron, tags: neutron}
 
-- hosts: cinder
+- name: Deploy openstack volume service (cinder)
+  hosts: cinder
   any_errors_fatal: true
   roles:
     - {role: pbos.cinder, tags: cinder}
 
-- hosts: openstack
+- name: Deploy openstack compute service (nova)
+  hosts: openstack
   any_errors_fatal: true
   roles:
     - {role: pbos.nova, tags: nova}
 
-- hosts: controller
+- name: Deploy openstack dashboard service (horizon)
+  hosts: controller
   any_errors_fatal: true
   roles:
     - {role: pbos.horizon, tags: horizon}
 
-- hosts: barbican
+- name: Deploy openstack key management service (barbican)
+  hosts: barbican
   any_errors_fatal: true
   roles:
     - {role: pbos.barbican, tags: barbican}

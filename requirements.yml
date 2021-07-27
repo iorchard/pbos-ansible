@@ -1,13 +1,31 @@
 # from github
-- src: https://github.com/iorchard/pbos.ntp
+- src: https://github.com/iorchard/pbos.barbican
   version: main
-- src: https://github.com/iorchard/pbos.mariadb
+- src: https://github.com/iorchard/pbos.ceph
   version: main
-- src: https://github.com/iorchard/pbos.rabbitmq
+- src: https://github.com/iorchard/pbos.cinder
+  version: main
+- src: https://github.com/iorchard/pbos.glance
+  version: main
+- src: https://github.com/iorchard/pbos.haproxy
+  version: main
+- src: https://github.com/iorchard/pbos.horizon
   version: main
 - src: https://github.com/iorchard/pbos.keepalived
   version: main
+- src: https://github.com/iorchard/pbos.keystone
+  version: main
+- src: https://github.com/iorchard/pbos.mariadb
+  version: main
 - src: https://github.com/iorchard/pbos.memcached
   version: main
-- src: https://github.com/iorchard/pbos.keystone
+- src: https://github.com/iorchard/pbos.neutron
+  version: main
+- src: https://github.com/iorchard/pbos.nova
+  version: main
+- src: https://github.com/iorchard/pbos.ntp
+  version: main
+- src: https://github.com/iorchard/pbos.placement
+  version: main
+- src: https://github.com/iorchard/pbos.rabbitmq
   version: main

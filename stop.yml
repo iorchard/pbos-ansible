@@ -9,6 +9,16 @@
         name: pbos.ntp
         tasks_from: stop
 
+- name: Stop storage service (ceph)
+  hosts: ceph
+  any_errors_fatal: true
+  tasks:
+    - name: stop ceph storage cluster
+      tags: ceph
+      include_role:
+        name: pbos.ceph
+        tasks_from: stop
+
 - name: Stop HA service (keepalived/haproxy)
   hosts: controller
   any_errors_fatal: true

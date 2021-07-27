@@ -5,6 +5,12 @@
   roles:
     - {role: pbos.ntp, tags: ntp}
 
+- name: Deploy storage service (ceph)
+  hosts: ceph
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.ceph, tags: ceph}
+
 - name: Deploy HA service (keepalived/haproxy)
   hosts: controller
   any_errors_fatal: true

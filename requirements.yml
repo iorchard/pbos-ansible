@@ -5,6 +5,8 @@
   version: main
 - src: https://github.com/iorchard/pbos.cinder
   version: main
+- src: https://github.com/iorchard/pbos.common
+  version: main
 - src: https://github.com/iorchard/pbos.glance
   version: main
 - src: https://github.com/iorchard/pbos.haproxy

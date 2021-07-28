@@ -1,4 +1,10 @@
 ---
+- name: Deploy common service
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.common, tags: always}
+
 - name: Deploy time service (ntp)
   hosts: all
   any_errors_fatal: true
@@ -10,13 +16,6 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.ceph, tags: ceph}
-
-- name: Deploy HA service (keepalived/haproxy)
-  hosts: controller
-  any_errors_fatal: true
-  roles:
-    - {role: pbos.keepalived, tags: keepalived}
-    - {role: pbos.haproxy, tags: haproxy}
 
 - name: Deploy cache service (memcached)
   hosts: controller
@@ -35,6 +34,13 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.rabbitmq, tags: rabbitmq}
+
+- name: Deploy HA service (keepalived/haproxy)
+  hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.keepalived, tags: keepalived}
+    - {role: pbos.haproxy, tags: haproxy}
 
 - name: Deploy openstack identity service (keystone)
   hosts: keystone

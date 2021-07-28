@@ -8,6 +8,16 @@
         name: pbos.ceph
         tasks_from: delete
 
+- name: Delete database service (mariadb)
+  hosts: mariadb
+  any_errors_fatal: true
+  tasks:
+    - name: delete mariadb
+      tags: mariadb
+      include_role:
+        name: pbos.mariadb
+        tasks_from: delete
+
 #- name: Stop HA service (keepalived/haproxy)
 #  hosts: controller
 #  any_errors_fatal: true

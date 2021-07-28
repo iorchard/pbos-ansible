@@ -39,7 +39,7 @@ Prepare
 
 Copy default inventory and create hosts file for your environment.::
 
-   $ MYSITE="mysite" # put your kubernetes site name
+   $ MYSITE="mysite" # put your site name
    $ cp -a inventory/default inventory/$MYSITE
    $ vi inventory/$MYSITE/hosts
    pbos-0 ansible_host=192.168.21.170 ansible_port=22 ansible_user=pengrix ansible_conntion=local
@@ -85,7 +85,7 @@ Check the connectivity to all nodes.::
 Run
 ----
 
-Get ansible roles to install pengrix kubernetes.::
+Get ansible roles to install pbos.::
 
    $ ansible-galaxy role install --force --role-file requirements.yml
 

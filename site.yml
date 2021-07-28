@@ -39,8 +39,8 @@
   hosts: controller
   any_errors_fatal: true
   roles:
-    - {role: pbos.keepalived, tags: keepalived}
     - {role: pbos.haproxy, tags: haproxy}
+    - {role: pbos.keepalived, tags: keepalived}
 
 - name: Deploy openstack identity service (keystone)
   hosts: keystone

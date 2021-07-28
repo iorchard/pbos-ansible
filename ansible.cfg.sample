@@ -1,5 +1,5 @@
 [defaults]
-inventory = inventory/default/hosts
+inventory = inventory/MYSITE/hosts
 nocolor = true
 host_key_checking = false
 deprecation_warnings = false

@@ -39,7 +39,7 @@ Prepare
 
 Copy default inventory and create hosts file for your environment.::
 
-   $ MYSITE="mysite" # put your site name
+   $ export MYSITE="mysite" # put your site name
    $ cp -a inventory/default inventory/$MYSITE
    $ vi inventory/$MYSITE/hosts
    pbos-0 ansible_host=192.168.21.170 ansible_port=22 ansible_user=pengrix ansible_conntion=local

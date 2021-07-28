@@ -1,6 +1,5 @@
 #!/bin/bash
 
-MYSITE="default"
 VAULTFILE="inventory/${MYSITE}/group_vars/all/vault.yml"
 
 # Create vault file.

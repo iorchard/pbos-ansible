@@ -78,6 +78,37 @@ Create a vault file for ssh and sudo password.::
    sudo password: 
    Encryption successful
 
+Edit group_vars/all/vars.yml for your environment.::
+
+   ## custom variables
+   # keepalived
+   keepalived_interface: "eth1"
+   keepalived_vip: "192.168.21.169"
+   
+   # openstack
+   openstack_release: "wallaby"
+   
+   # openstack mariadb
+   openstack_mariadb_acl_cidr:
+     - "localhost"
+     - "192.168.21.0/255.255.255.0"
+   
+   # neutron
+   provider_interface: "eth2"
+   overlay_interface: "eth3"
+   
+   # ceph
+   ceph_public_network_iface: eth4
+   ceph_rgw_service_iface: eth0
+   ceph_public_network: 192.168.24.0/24
+   ceph_cluster_network: 192.168.24.0/24
+   ceph_replicas: 2
+   ceph_mgr_pg_autoscaler: true
+   ceph_osd_devices:
+     - /dev/sdb
+     - /dev/sdc
+     - /dev/sdd
+
 Check the connectivity to all nodes.::
 
    $ ansible -m ping all

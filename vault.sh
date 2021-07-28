@@ -7,7 +7,7 @@ VAULTFILE="inventory/${MYSITE}/group_vars/all/vault.yml"
 read -s -p 'ssh password: ' SSHPASS; echo ""
 read -s -p 'sudo password: ' SUDOPASS; echo ""
 read -s -p 'openstack admin password: ' OS_ADMIN_PASS; echo ""
-MARIADB_ROOTP_ASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
+MARIADB_ROOT_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 RABBITMQ_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 KEYSTONE_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 GLANCE_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)

@@ -30,7 +30,7 @@ osod-[0:2]
 osod-[0:2]
 
 [barbican]
-osod-0
+osod-[0:2]
 
 [openstack:children]
 controller

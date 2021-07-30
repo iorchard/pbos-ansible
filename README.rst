@@ -80,6 +80,7 @@ Create a vault file for ssh and sudo password.::
 
 Edit group_vars/all/vars.yml for your environment.::
 
+   $ vi inventory/$MYSITE/group_vars/all/vars.yml
    ## custom variables
    # keepalived
    keepalived_interface: "eth1"

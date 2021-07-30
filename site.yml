@@ -3,90 +3,95 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - {role: pbos.common, tags: always}
+    - {role: pbos.common, tags: ['common', 'always']}
 
 - name: Deploy time service (ntp)
   hosts: all
   any_errors_fatal: true
   roles:
-    - {role: pbos.ntp, tags: ntp}
+    - {role: pbos.ntp, tags: ['ntp', 'pbos-infra']}
 
 - name: Deploy storage service (ceph)
   hosts: ceph
   any_errors_fatal: true
   roles:
-    - {role: pbos.ceph, tags: ceph}
+    - {role: pbos.ceph, tags: ['ceph', 'pbos-storage']}
 
 - name: Deploy cache service (memcached)
   hosts: controller
   any_errors_fatal: true
   roles:
-    - {role: pbos.memcached, tags: memcached}
+    - {role: pbos.memcached, tags: ['memcached', 'pbos-infra']}
 
 - name: Deploy database service (mariadb galera cluster)
   hosts: mariadb
   any_errors_fatal: true
   roles:
-    - {role: pbos.mariadb, tags: mariadb}
+    - {role: pbos.mariadb, tags: ['mariadb', 'pbos-infra']}
 
 - name: Deploy messaging service (rabbitmq)
   hosts: rabbitmq
   any_errors_fatal: true
   roles:
-    - {role: pbos.rabbitmq, tags: rabbitmq}
+    - {role: pbos.rabbitmq, tags: ['rabbitmq', 'pbos-infra']}
 
-- name: Deploy HA service (keepalived/haproxy)
+- name: Deploy HA service (haproxy)
   hosts: controller
   any_errors_fatal: true
   roles:
-    - {role: pbos.haproxy, tags: haproxy}
-    - {role: pbos.keepalived, tags: keepalived}
+    - {role: pbos.haproxy, tags: ['haproxy', 'pbos-infra']}
+
+- name: Deploy HA service (keepalived)
+  hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.keepalived, tags: ['keepalived', 'pbos-infra']}
 
 - name: Deploy openstack identity service (keystone)
   hosts: keystone
   any_errors_fatal: true
   roles:
-    - {role: pbos.keystone, tags: keystone}
+    - {role: pbos.keystone, tags: ['keystone', 'openstack']}
 
 - name: Deploy openstack image service (glance)
   hosts: glance
   any_errors_fatal: true
   roles:
-    - {role: pbos.glance, tags: glance}
+    - {role: pbos.glance, tags: ['glance', 'openstack']}
 
 - name: Deploy openstack resource service (placement)
   hosts: placement
   any_errors_fatal: true
   roles:
-    - {role: pbos.placement, tags: placement}
+    - {role: pbos.placement, tags: ['placement', 'openstack']}
 
 - name: Deploy openstack network service (neutron)
   hosts: openstack
   any_errors_fatal: true
   roles:
-    - {role: pbos.neutron, tags: neutron}
+    - {role: pbos.neutron, tags: ['neutron', 'openstack']}
 
 - name: Deploy openstack volume service (cinder)
   hosts: cinder
   any_errors_fatal: true
   roles:
-    - {role: pbos.cinder, tags: cinder}
+    - {role: pbos.cinder, tags: ['cinder', 'openstack']}
 
 - name: Deploy openstack compute service (nova)
   hosts: openstack
   any_errors_fatal: true
   roles:
-    - {role: pbos.nova, tags: nova}
+    - {role: pbos.nova, tags: ['nova', 'openstack']}
 
 - name: Deploy openstack dashboard service (horizon)
   hosts: controller
   any_errors_fatal: true
   roles:
-    - {role: pbos.horizon, tags: horizon}
+    - {role: pbos.horizon, tags: ['horizon', 'openstack']}
 
 - name: Deploy openstack key management service (barbican)
   hosts: barbican
   any_errors_fatal: true
   roles:
-    - {role: pbos.barbican, tags: barbican}
+    - {role: pbos.barbican, tags: ['barbican', 'openstack']}
 ...

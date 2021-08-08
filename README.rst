@@ -22,11 +22,11 @@ Install python3-venv.::
 
 Create virtual env.::
 
-   $ python3 -m venv .envs/pbos
+   $ python3 -m venv ~/.envs/pbos
 
 Source the env.::
 
-   $ source .envs/pbos/bin/activate
+   $ source ~/.envs/pbos/bin/activate
 
 Install ansible.::
 
@@ -36,6 +36,10 @@ Install ansible.::
 
 Prepare
 ---------
+
+Go to pbos-ansible directory.::
+
+   $ cd pbos-ansible
 
 Copy default inventory and create hosts file for your environment.::
 

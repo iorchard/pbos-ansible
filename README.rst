@@ -3,6 +3,13 @@ pbos-ansible
 
 This is a guide to install OpenStack on pure baremetal using ansible playbook.
 
+Supported OS
+----------------
+
+* Debian 11 (bullseye)
+* Ubuntu 20.04 (focal)
+* Rocky Linux 8.x
+
 Assumptions
 -------------
 
@@ -12,13 +19,20 @@ Assumptions
 * Ansible user in every node has the same password.
   We will use vault_ssh_pass in ansible vault.
 
-Install ansible
------------------
+Install packages
+------------------------
 
-Install python3-venv.::
+For Debian/Ubuntu::
 
    $ sudo apt update
-   $ sudo apt install -y python3-venv
+   $ sudo apt install -y python3-venv sshpass
+
+For Rocky Linux::
+
+   $ sudo yum install -y python3 sshpass
+
+Install ansible in virtual env
+----------------------------------
 
 Create virtual env.::
 
@@ -75,11 +89,11 @@ Create and update ansible.cfg.::
 
    $ sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
 
-Create a vault file for ssh and sudo password.::
+Create a vault file for user and openstack admin password.::
 
    $ ./vault.sh
-   ssh password: 
-   sudo password: 
+   user password: 
+   openstack admin password: 
    Encryption successful
 
 Edit group_vars/all/vars.yml for your environment.::
@@ -128,5 +142,4 @@ Get ansible roles to install pbos.::
 Run ansible playbook.::
 
    $ ansible-playbook site.yml
-
 

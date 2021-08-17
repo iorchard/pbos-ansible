@@ -1,37 +1,111 @@
 ---
-- name: Stop time service (ntp)
-  hosts: all
-  any_errors_fatal: true
-  tasks:
-    - name: stop ntp
-      tags: ntp
-      include_role:
-        name: pbos.ntp
-        tasks_from: stop
-
-- name: Stop storage service (ceph)
-  hosts: ceph
-  any_errors_fatal: true
-  tasks:
-    - name: stop ceph storage cluster
-      tags: ceph
-      include_role:
-        name: pbos.ceph
-        tasks_from: stop
-
-- name: Stop HA service (keepalived/haproxy)
+- name: Stop openstack dashboard service (horizon)
   hosts: controller
   any_errors_fatal: true
   tasks:
-    - name: stop keepalived
-      tags: keepalived
+    - name: stop horizon
+      tags:
+        - horizon
+        - openstack
       include_role:
-        name: pbos.keepalived
+        name: pbos.horizon
         tasks_from: stop
-    - name: stop haproxy 
-      tags: haproxy
+
+- name: Stop openstack key management service (barbican)
+  hosts: barbican
+  any_errors_fatal: true
+  tasks:
+    - name: stop barbican
+      tags:
+        - barbican
+        - openstack
       include_role:
-        name: pbos.haproxy
+       name: pbos.barbican
+       tasks_from: stop
+
+- name: Stop openstack compute service (nova)
+  hosts: openstack
+  any_errors_fatal: true
+  tasks:
+    - name: stop nova
+      tags:
+        - nova
+        - openstack
+      include_role:
+        name: pbos.nova
+        tasks_from: stop
+
+- name: Stop openstack volume service (cinder)
+  hosts: cinder
+  any_errors_fatal: true
+  tasks:
+    - name: stop cinder
+      tags:
+        - cinder
+        - openstack
+      include_role:
+        name: pbos.cinder
+        tasks_from: stop
+
+- name: Stop openstack network service (neutron)
+  hosts: openstack
+  any_errors_fatal: true
+  tasks:
+    - name: stop neutron
+      tags:
+        - neutron
+        - openstack
+      include_role:
+        name: pbos.neutron
+        tasks_from: stop
+
+- name: Stop openstack resource service (placement)
+  hosts: placement
+  any_errors_fatal: true
+  tasks:
+    - name: stop placement
+      tags:
+        - placement
+        - openstack
+      include_role:
+        name: pbos.placement
+        tasks_from: stop
+
+- name: Stop openstack image service (glance)
+  hosts: glance
+  any_errors_fatal: true
+  tasks:
+    - name: stop glance
+      tags:
+        - glance
+        - openstack
+      include_role:
+        name: pbos.glance
+        tasks_from: stop
+
+- name: Stop openstack identity service (keystone)
+  hosts: keystone
+  any_errors_fatal: true
+  tasks:
+    - name: stop keystone
+      tags:
+        - keystone
+        - openstack
+      include_role:
+        name: pbos.keystone
+        tasks_from: stop
+
+- name: Stop messaging service (rabbitmq)
+  hosts: rabbitmq
+  any_errors_fatal: true
+  serial: 1
+  tasks:
+    - name: stop rabbitmq
+      tags:
+        - rabbitmq
+        - pbos-infra
+      include_role:
+        name: pbos.rabbitmq
         tasks_from: stop
 
 - name: Stop cache service (memcached)
@@ -39,7 +113,9 @@
   any_errors_fatal: true
   tasks:
     - name: stop memcached
-      tags: memcached
+      tags:
+        - memcached
+        - pbos-infra
       include_role:
         name: pbos.memcached
         tasks_from: stop
@@ -50,100 +126,53 @@
   serial: 1
   tasks:
     - name: stop mariadb
-      tags: mariadb
+      tags:
+        - mariadb
+        - pbos-infra
       include_role:
         name: pbos.mariadb
         tasks_from: stop
 
-- name: Stop messaging service (rabbitmq)
-  hosts: rabbitmq
-  any_errors_fatal: true
-  serial: 1
-  tasks:
-    - name: stop rabbitmq
-      tags: rabbitmq
-      include_role:
-        name: pbos.rabbitmq
-        tasks_from: stop
-
-- name: Stop openstack identity service (keystone)
-  hosts: keystone
-  any_errors_fatal: true
-  tasks:
-    - name: stop keystone
-      tags: keystone
-      include_role:
-        name: pbos.keystone
-        tasks_from: stop
-
-- name: Stop openstack image service (glance)
-  hosts: glance
-  any_errors_fatal: true
-  tasks:
-    - name: stop glance
-      tags: glance
-      include_role:
-        name: pbos.glance
-        tasks_from: stop
-
-
-- name: Stop openstack resource service (placement)
-  hosts: placement
-  any_errors_fatal: true
-  tasks:
-    - name: stop placement
-      tags: placement
-      include_role:
-        name: pbos.placement
-        tasks_from: stop
-
-- name: Stop openstack network service (neutron)
-  hosts: openstack
-  any_errors_fatal: true
-  tasks:
-    - name: stop neutron
-      tags: neutron
-      include_role:
-        name: pbos.neutron
-        tasks_from: stop
-
-- name: Stop openstack volume service (cinder)
-  hosts: cinder
-  any_errors_fatal: true
-  tasks:
-    - name: stop cinder
-      tags: cinder
-      include_role:
-        name: pbos.cinder
-        tasks_from: stop
-
-- name: Stop openstack compute service (nova)
-  hosts: openstack
-  any_errors_fatal: true
-  tasks:
-    - name: stop nova
-      tags: nova
-      include_role:
-        name: pbos.nova
-        tasks_from: stop
-
-- name: Stop openstack dashboard service (horizon)
+- name: Stop HA service (keepalived/haproxy)
   hosts: controller
   any_errors_fatal: true
   tasks:
-    - name: stop horizon
-      tags: horizon
+    - name: stop keepalived
+      tags:
+        - keepalived
+        - pbos-infra
       include_role:
-        name: pbos.horizon
+        name: pbos.keepalived
+        tasks_from: stop
+    - name: stop haproxy 
+      tags:
+        - haproxy
+        - pbos-infra
+      include_role:
+        name: pbos.haproxy
         tasks_from: stop
 
-- name: Stop openstack key management service (barbican)
-  hosts: barbican
+- name: Stop storage service (ceph)
+  hosts: ceph
   any_errors_fatal: true
   tasks:
-    - name: stop barbican
-      tags: barbican
+    - name: stop ceph storage cluster
+      tags:
+        - ceph
+        - pbos-storage
       include_role:
-        name: pbos.barbican
+        name: pbos.ceph
+        tasks_from: stop
+
+- name: Stop time service (ntp)
+  hosts: all
+  any_errors_fatal: true
+  tasks:
+    - name: stop ntp
+      tags:
+        - ntp
+        - pbos-infra
+      include_role:
+        name: pbos.ntp
         tasks_from: stop
 ...

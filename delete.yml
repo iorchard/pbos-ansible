@@ -160,4 +160,15 @@
       import_role:
         name: pbos.ceph
         tasks_from: delete
+
+- name: Delete time service (ntp)
+  hosts: all
+  tasks:
+    - name: stop ntp
+      tags:
+        - ntp
+        - pbos-infra
+      import_role:
+        name: pbos.ntp
+        tasks_from: stop
 ...

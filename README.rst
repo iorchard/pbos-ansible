@@ -29,7 +29,8 @@ For Debian/Ubuntu::
 
 For Rocky Linux::
 
-   $ sudo yum install -y python3 sshpass
+   $ sudo dnf -y install epel-release
+   $ sudo dnf -y install python3 sshpass
 
 Install ansible in virtual env
 ----------------------------------

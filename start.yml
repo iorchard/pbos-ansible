@@ -4,7 +4,9 @@
   any_errors_fatal: true
   tasks:
     - name: start ntp
-      tags: ntp
+      tags:
+        - ntp
+        - pbos-infra
       include_role:
         name: pbos.ntp
         tasks_from: start
@@ -14,12 +16,16 @@
   any_errors_fatal: true
   tasks:
     - name: start keepalived
-      tags: keepalived
+      tags:
+        - keepalived
+        - pbos-infra
       include_role:
         name: pbos.keepalived
         tasks_from: start
     - name: start haproxy 
-      tags: haproxy
+      tags:
+        - haproxy
+        - pbos-infra
       include_role:
         name: pbos.haproxy
         tasks_from: start
@@ -29,7 +35,9 @@
   any_errors_fatal: true
   tasks:
     - name: start memcached
-      tags: memcached
+      tags: 
+        - memcached
+        - pbos-infra
       include_role:
         name: pbos.memcached
         tasks_from: start
@@ -40,7 +48,9 @@
   serial: 1
   tasks:
     - name: start mariadb
-      tags: mariadb
+      tags:
+        - mariadb
+        - pbos-infra
       include_role:
         name: pbos.mariadb
         tasks_from: start
@@ -51,7 +61,9 @@
   serial: 1
   tasks:
     - name: start rabbitmq
-      tags: rabbitmq
+      tags:
+        - rabbitmq
+        - pbos-infra
       include_role:
         name: pbos.rabbitmq
         tasks_from: start
@@ -61,7 +73,9 @@
   any_errors_fatal: true
   tasks:
     - name: start keystone
-      tags: keystone
+      tags:
+        - keystone
+        - openstack
       include_role:
         name: pbos.keystone
         tasks_from: start
@@ -71,18 +85,21 @@
   any_errors_fatal: true
   tasks:
     - name: start glance
-      tags: glance
+      tags:
+        - glance
+        - openstack
       include_role:
         name: pbos.glance
         tasks_from: start
-
 
 - name: Start openstack resource service (placement)
   hosts: placement
   any_errors_fatal: true
   tasks:
     - name: start placement
-      tags: placement
+      tags:
+        - placement
+        - openstack
       include_role:
         name: pbos.placement
         tasks_from: start
@@ -92,7 +109,9 @@
   any_errors_fatal: true
   tasks:
     - name: start neutron
-      tags: neutron
+      tags:
+        - neutron
+        - openstack
       include_role:
         name: pbos.neutron
         tasks_from: start
@@ -102,7 +121,9 @@
   any_errors_fatal: true
   tasks:
     - name: start cinder
-      tags: cinder
+      tags:
+        - cinder
+        - openstack
       include_role:
         name: pbos.cinder
         tasks_from: start
@@ -112,7 +133,9 @@
   any_errors_fatal: true
   tasks:
     - name: start nova
-      tags: nova
+      tags:
+        - nova
+        - openstack
       include_role:
         name: pbos.nova
         tasks_from: start
@@ -122,7 +145,9 @@
   any_errors_fatal: true
   tasks:
     - name: start horizon
-      tags: horizon
+      tags:
+        - horizon
+        - openstack
       include_role:
         name: pbos.horizon
         tasks_from: start
@@ -132,7 +157,9 @@
   any_errors_fatal: true
   tasks:
     - name: start barbican
-      tags: barbican
+      tags:
+        - barbican
+        - openstack
       include_role:
         name: pbos.barbican
         tasks_from: start

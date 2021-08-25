@@ -257,17 +257,17 @@ Run openstack-test.sh script.::
 
     $ ./scripts/openstack_test.sh
 
-What it does are
+It
 
-* Create a private/provider network and subnet
-* Create a router
-* Create a cirros image
-* Add security group rules
-* Create a flavor
-* Create an instance
-* Add a floating ip to an instance
-* Create a volume
-* Attach a volume to an instance
+* Creates a private/provider network and subnet
+* Creates a router
+* Creates a cirros image
+* Adds security group rules
+* Creates a flavor
+* Creates an instance
+* Adds a floating ip to an instance
+* Creates a volume
+* Attaches a volume to an instance
 
 If everything goes well, the last output looks like this.::
 
@@ -299,6 +299,4 @@ that has a provider network ip address.::
 
 Password is the default cirros password (hint: password seems to be created
 by someone who loves baseball, I think.)
-
-
 

@@ -18,6 +18,17 @@ Assumptions
   We will use vault_sudo_pass in ansible vault.
 * Ansible user in every node has the same password.
   We will use vault_ssh_pass in ansible vault.
+* All node entries should be in /etc/hosts on every node.::
+
+    $ cat /etc/hosts
+    127.0.0.1	localhost
+    192.168.21.211 pbos-0 # ROCKY Linux
+    192.168.21.212 pbos-1 # ROCKY Linux
+    192.168.21.213 pbos-2 # ROCKY Linux
+    192.168.21.214 pbos-3 # ROCKY Linux
+    192.168.21.215 pbos-4 # ROCKY Linux
+    192.168.21.216 pbos-5 # ROCKY Linux
+
 
 Install packages
 ------------------------

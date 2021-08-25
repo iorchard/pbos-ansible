@@ -1,52 +1,57 @@
-osod-0 ansible_host=192.168.21.170 ansible_port=22 ansible_user=pengrix ansible_connection=local
-osod-1 ansible_host=192.168.21.171 ansible_port=22 ansible_user=pengrix
-osod-2 ansible_host=192.168.21.172 ansible_port=22 ansible_user=pengrix
-osod-3 ansible_host=192.168.21.173 ansible_port=22 ansible_user=pengrix
-osod-4 ansible_host=192.168.21.174 ansible_port=22 ansible_user=pengrix
-osod-5 ansible_host=192.168.21.175 ansible_port=22 ansible_user=pengrix
+pbos-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex ansible_connection=local
+pbos-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
+pbos-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
+pbos-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=clex
+pbos-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=clex
+pbos-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=clex
 
 [controller]
-osod-[0:2]
+pbos-[1:3]
 
 [compute]
-osod-[3:5]
+pbos-[4:6]
 
-[mariadb]
-osod-[0:2]
 
-[rabbitmq]
-osod-[0:2]
+###################################################
+## Do not touch below if you are not an expert!!! #
+###################################################
 
-[keystone]
-osod-[0:2]
+[mariadb:children]
+controller
 
-[glance]
-osod-[0:2]
+[rabbitmq:children]
+controller
 
-[placement]
-osod-[0:2]
+[keystone:children]
+controller
 
-[cinder]
-osod-[0:2]
+[glance:children]
+controller
 
-[barbican]
-osod-[0:2]
+[placement:children]
+controller
+
+[cinder:children]
+controller
+
+[barbican:children]
+controller
 
 [openstack:children]
 controller
 compute
 
-[ceph_mon]
-osod-[0:2]
+[ceph_mon:children]
+controller
 
-[ceph_mgr]
-osod-[0:2]
+[ceph_mgr:children]
+controller
 
-[ceph_rgw]
-osod-[0:2]
+[ceph_rgw:children]
+controller
 
-[ceph_osd]
-osod-[3:5]
+[ceph_osd:children]
+compute
 
 [ceph:children]
 ceph_mon

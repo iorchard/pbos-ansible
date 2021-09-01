@@ -3,6 +3,6 @@ inventory = inventory/MYSITE/hosts
 nocolor = true
 host_key_checking = false
 deprecation_warnings = false
-#stdout_callback = debug
+callback_whitelist = profile_tasks
 roles_path = ~/.ansible/roles
 vault_password_file = .vaultpass

@@ -38,4 +38,6 @@ echo "vault_barbican_password: '$BARBICAN_PASS'" >> $VAULTFILE
 echo "vault_barbican_kek: '$BARBICAN_KEK'" >> $VAULTFILE
 echo -n "..." >> $VAULTFILE
 head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8 > .vaultpass
+chmod 0400 .vaultpass
+sudo chattr +i .vaultpass
 ansible-vault encrypt $VAULTFILE

@@ -47,6 +47,9 @@ For Rocky Linux::
    $ sudo dnf -y install epel-release
    $ sudo dnf -y install python3 sshpass
 
+python3 and sshpass are the essential packages to run PBOS playbook.
+So installing them on all nodes are required.
+
 Install ansible in virtual env
 ----------------------------------
 
@@ -193,6 +196,10 @@ Edit group_vars/all/vars.yml for your environment.::
    # neutron
    provider_interface: "eth2"
    overlay_interface: "eth3"
+   
+   ######################################################
+   # Warn: Do not edit below if you are not an expert.  #
+   ######################################################
 
 
 Check the connectivity to all nodes.::
@@ -202,17 +209,17 @@ Check the connectivity to all nodes.::
 Run
 ----
 
-Get ansible roles to install pbos.::
+Get ansible roles.::
 
    $ ansible-galaxy role install --force --role-file requirements.yml
 
-Run ansible playbook.::
+Run a playbook.::
 
    $ ansible-playbook site.yml
 
 
-Post-installation
-------------------
+Check
+------
 
 source .bashrc.::
 
@@ -229,7 +236,8 @@ Check openstack services.::
 
     $ openstack service list
 
-There should be 8 services.
+There should be 8 services. - barbican, cinderv2, glance, cinderv3, neutron,
+nova, keystone, placement.
 
 Check openstack compute service.::
 

@@ -285,7 +285,8 @@ Run openstack-test.sh script.::
 
 It
 
-* Creates a private/provider network and subnet
+* Creates a private/provider network and subnet 
+  When it creates provider network, it will ask address pool range.
 * Creates a router
 * Creates a cirros image
 * Adds security group rules
@@ -297,7 +298,14 @@ It
 
 If everything goes well, the last output looks like this.::
 
-   $ ./scripts/openstack_test.sh 
+   $ ./scripts/openstack_test.sh
+   ...
+   Creating provider network...
+   Type the provider network address (e.g. 192.168.22.0/24): 192.168.22.0/24
+   Okay. I got the provider network address: 192.168.22.0/24
+   The first IP address to allocate (e.g. 192.168.22.100): 192.168.22.200
+   The last IP address to allocate (e.g. 192.168.22.200): 192.168.22.210
+   Okay. I got the last address of provider network pool: 192.168.22.210
    ...
    +------------------+------------------------------------------------+
    | Field            | Value                                          |

@@ -37,6 +37,10 @@ echo "vault_nova_password: '$NOVA_PASS'" >> $VAULTFILE
 echo "vault_barbican_password: '$BARBICAN_PASS'" >> $VAULTFILE
 echo "vault_barbican_kek: '$BARBICAN_KEK'" >> $VAULTFILE
 echo -n "..." >> $VAULTFILE
+if [ -f .vaultpass ]; then
+  sudo chattr -i .vaultpass
+  rm -f .vaultpass
+fi
 head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8 > .vaultpass
 chmod 0400 .vaultpass
 sudo chattr +i .vaultpass

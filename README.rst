@@ -275,6 +275,10 @@ go to http://<controller_node_ip>:8000/dashboard/
 Test
 ------
 
+Source openstack adminrc.::
+
+    $ source ~/.adminrc
+
 Run openstack-test.sh script.::
 
     $ ./scripts/openstack_test.sh

@@ -258,6 +258,20 @@ Check openstack network agent list.::
 
 Every service should be alive (:-)) and up.
 
+Horizon
+----------
+
+The horizon dashboard listens on tcp 8000 on controller nodes.
+
+Open your browser. 
+
+If keepalived is set up, 
+go to http://<keepalived_vip>:8000/dashboard/
+
+If keepalived is not set up,
+go to http://<controller_node_ip>:8000/dashboard/
+
+
 Test
 ------
 

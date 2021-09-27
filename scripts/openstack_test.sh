@@ -35,35 +35,8 @@ ask_public_net_settings () {
         echo "You typed the wrong subnet address format. Type again."
     done
     
-    while true; do
-        read -p 'The first IP address to allocate (e.g. 192.168.22.100): ' FIP
-        # check if FIP is in PN range.
-        FIP2=$(echo $FIP|cut -d'.' -f1,2,3)
-        if [[ "$PN" =~ "$FIP2" ]];then
-            echo "Okay. I got the first address of provider network pool: $FIP"
-            break;
-        fi
-        echo "You typed the wrong IP address. Type again."
-    done
-    
-    while true; do
-        read -p 'The last IP address to allocate (e.g. 192.168.22.200): ' LIP
-        # check if LIP is in PN range.
-        LIP2=$(echo $LIP|cut -d'.' -f1,2,3)
-        if [[ "$PN" =~ "$LIP2" ]];then
-            # check if LIP is bigger than FIP
-            OLDIFS=$IFS
-            IFS='.'
-            l=($LIP)
-            f=($FIP)
-            IFS=$OLDIFS
-            if [[ ${l[3]} -gt ${f[3]} ]]; then
-                echo "Okay. I got the last address of provider network pool: $LIP"
-                break;
-            fi
-        fi
-        echo "You typed the wrong IP address. Type again."
-    done
+    read -p 'The first IP address to allocate (e.g. 192.168.22.100): ' FIP
+    read -p 'The last IP address to allocate (e.g. 192.168.22.200): ' LIP
 }
 
 echo "Creating private network..."

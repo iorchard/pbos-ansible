@@ -45,7 +45,7 @@ For Debian/Ubuntu::
 For Rocky Linux::
 
    $ sudo dnf -y install epel-release
-   $ sudo dnf -y install python3 sshpass
+   $ sudo dnf -y install python3 sshpass python3-cryptography
 
 python3 and sshpass are the essential packages to run PBOS playbook.
 So installing them on all nodes are required.

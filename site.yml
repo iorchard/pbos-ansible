@@ -24,7 +24,7 @@
     - {role: pbos.memcached, tags: ['memcached', 'pbos-infra']}
 
 - name: Deploy database service (mariadb galera cluster)
-  hosts: mariadb
+  hosts: all
   any_errors_fatal: true
   roles:
     - {role: pbos.mariadb, tags: ['mariadb', 'pbos-infra']}

@@ -20,7 +20,7 @@ openstack_mariadb_acl_cidr:
 storage_backends:
   - ceph
   - lvm
-# ceph
+## ceph
 ceph_public_network_iface: eth4
 ceph_rgw_service_iface: eth0
 ceph_public_network: 192.168.24.0/24
@@ -32,7 +32,10 @@ ceph_osd_devices:
   - /dev/sdc
   - /dev/sdd
 
-# lvm size in GiB. Should be set it less than / partition available size.
+## LVM
+# loopback file path for LVM.
+loopback_file: "/storage/pbos.lvm"
+# lvm size in GiB. 
 lvm_size: 50G
 
 # neutron

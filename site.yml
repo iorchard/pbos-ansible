@@ -30,7 +30,7 @@
     - {role: pbos.mariadb, tags: ['mariadb', 'pbos-infra']}
 
 - name: Deploy messaging service (rabbitmq)
-  hosts: rabbitmq
+  hosts: openstack
   any_errors_fatal: true
   roles:
     - {role: pbos.rabbitmq, tags: ['rabbitmq', 'pbos-infra']}

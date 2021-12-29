@@ -1,8 +1,12 @@
 ---
 ## custom variables
-# keepalived
+# keepalived on mgmt iface
 keepalived_interface: "eth1"
 keepalived_vip: "192.168.21.210"
+# keepalived on service iface
+# if the default gateway is on service iface, we should set this variables.
+keepalived_interface_svc: "eth0"
+keepalived_vip_svc: "192.168.20.200"
 
 # openstack
 openstack_release: "wallaby"

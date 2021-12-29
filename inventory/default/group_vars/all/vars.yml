@@ -51,6 +51,9 @@ ansible_password: "{{ vault_ssh_password }}"
 ansible_become_password: "{{ vault_sudo_password }}"
 ansible_python_interpreter: "/usr/bin/python3"
 
+# common
+ca_passphrase: "{{ vault_ca_passphrase }}"
+
 # mariadb / openstack password
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
 keystone_password: "{{ vault_keystone_password }}"

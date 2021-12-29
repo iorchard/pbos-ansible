@@ -6,19 +6,20 @@ This is a guide to install OpenStack on pure baremetal using ansible playbook.
 Supported OS
 ----------------
 
-* Debian 11 (bullseye)
-* Ubuntu 20.04 (focal)
+* Debian 11 (bullseye): Not maintained
+* Ubuntu 20.04 (focal): Not maintained
 * Rocky Linux 8.x
 
 Assumptions
 -------------
 
 * The first node in nodes group is the ansible deployer.
-* Ansible user in every node has a sudo privilege without NOPASSWD option.
-  We will use vault_sudo_pass in ansible vault.
+* Ansible user in every node has a sudo privilege.
+  If the sudo privilege without NOPASSWD, 
+  we will use vault_sudo_pass in ansible vault.
 * Ansible user in every node has the same password.
   We will use vault_ssh_pass in ansible vault.
-* All node entries should be in /etc/hosts on every node.::
+* All nodes should be in /etc/hosts on every node.::
 
     $ cat /etc/hosts
     127.0.0.1	localhost
@@ -47,8 +48,11 @@ For Rocky Linux::
    $ sudo dnf -y install epel-release
    $ sudo dnf -y install python3 sshpass python3-cryptography
 
-python3 and sshpass are the essential packages to run PBOS playbook.
-So installing them on all nodes are required.
+* python3 is required to run PBOS playbook so install it on all nodes.
+* sshpass is required for password-based ssh connection so install it 
+  on the deployer node.
+* python3-cryptography is required by ansible crypto collection so 
+  install it on the deployer node.
 
 Install ansible in virtual env
 ----------------------------------
@@ -65,7 +69,7 @@ Install ansible.::
 
    $ python -m pip install -U pip
    $ python -m pip install wheel
-   $ python -m pip install ansible pymysql openstacksdk
+   $ python -m pip install ansible==4.10.0 pymysql openstacksdk
 
 Prepare
 ---------

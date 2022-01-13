@@ -61,7 +61,7 @@ Create virtual env.::
 
    $ python3 -m venv ~/.envs/pbos
 
-Source the env.::
+Activate the virtual env.::
 
    $ source ~/.envs/pbos/bin/activate
 

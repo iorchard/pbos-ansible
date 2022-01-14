@@ -6,7 +6,7 @@ keepalived_vip: "192.168.21.210"
 # keepalived on service iface
 # if the default gateway is on service iface, we should set this variables.
 keepalived_interface_svc: "eth0"
-keepalived_vip_svc: "192.168.20.200"
+keepalived_vip_svc: "192.168.20.210"
 
 # openstack
 openstack_release: "wallaby"
@@ -48,12 +48,12 @@ overlay_interface: "eth3"
 
 # CA cert
 # Set this to true to use the existing CA key and certificate
-# Override tls_tmp_ca to the existing CA key and cert directory 
 skip_ca_cert_creation_tasks: false
-tls_tmp_ca: {
-  key: "/path/to/ca-key.pem",
-  crt: "/path/to/ca-cert.pem"
-}
+# Override tls_tmp_ca to the existing CA key and cert directory 
+#tls_tmp_ca: {
+#  key: "/path/to/ca-key.pem",
+#  crt: "/path/to/ca-cert.pem"
+#}
 
 
 ######################################################

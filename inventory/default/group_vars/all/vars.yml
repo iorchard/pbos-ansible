@@ -8,6 +8,9 @@ keepalived_vip: "192.168.21.210"
 keepalived_interface_svc: "eth0"
 keepalived_vip_svc: "192.168.20.210"
 
+# ntp
+ntp_allowed_cidr: "192.168.21.0/24"
+ 
 # openstack
 openstack_release: "wallaby"
 

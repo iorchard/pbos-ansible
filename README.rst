@@ -8,12 +8,12 @@ Supported OS
 
 * Debian 11 (bullseye): Not maintained
 * Ubuntu 20.04 (focal): Not maintained
-* Rocky Linux 8.x
+* Rocky Linux 8.x: Only supported OS currently
 
 Assumptions
 -------------
 
-* The first node in nodes group is the ansible deployer.
+* The first node in controller group is the ansible deployer.
 * Ansible user in every node has a sudo privilege.
   If the sudo privilege without NOPASSWD, 
   we will use vault_sudo_pass in ansible vault.
@@ -23,12 +23,12 @@ Assumptions
 
     $ cat /etc/hosts
     127.0.0.1	localhost
-    192.168.21.211 pbos-0 # ROCKY Linux
-    192.168.21.212 pbos-1 # ROCKY Linux
-    192.168.21.213 pbos-2 # ROCKY Linux
-    192.168.21.214 pbos-3 # ROCKY Linux
-    192.168.21.215 pbos-4 # ROCKY Linux
-    192.168.21.216 pbos-5 # ROCKY Linux
+    192.168.21.201 pbos-0 # ROCKY Linux
+    192.168.21.202 pbos-1 # ROCKY Linux
+    192.168.21.203 pbos-2 # ROCKY Linux
+    192.168.21.204 pbos-3 # ROCKY Linux
+    192.168.21.205 pbos-4 # ROCKY Linux
+    192.168.21.206 pbos-5 # ROCKY Linux
 
 * ansible inventory groups
 
@@ -162,9 +162,13 @@ Edit group_vars/all/vars.yml for your environment.::
    $ vi inventory/$MYSITE/group_vars/all/vars.yml
    ---
    ## custom variables
-   # keepalived
+   # keepalived on mgmt iface
    keepalived_interface: "eth1"
-   keepalived_vip: "192.168.21.210"
+   keepalived_vip: "192.168.21.200"
+   # keepalived on service iface
+   # if the default gateway is on service iface, we should set this variables.
+   keepalived_interface_svc: "eth0"
+   keepalived_vip_svc: "192.168.20.200"
    
    # openstack
    openstack_release: "wallaby"
@@ -195,6 +199,7 @@ Edit group_vars/all/vars.yml for your environment.::
      - /dev/sdd
    
    # lvm size in GiB. Should be set it less than / partition available size.
+   loopback_file: "/storage/pbos.lvm"
    lvm_size: 50G
    
    # neutron
@@ -269,11 +274,11 @@ The horizon dashboard listens on tcp 8000 on controller nodes.
 
 Open your browser. 
 
-If keepalived is set up, 
-go to http://<keepalived_vip>:8000/dashboard/
+If keepalived_svc_vip is set, 
+go to http://<keepalived_vip_svc>:8000/dashboard/
 
-If keepalived is not set up,
-go to http://<controller_node_ip>:8000/dashboard/
+If keepalived_svc_ip is not set,
+go to http://<keepalived_vip>:8000/dashboard/
 
 
 Test
@@ -296,7 +301,7 @@ It
 * Creates a volume
 * Attaches a volume to an instance
 
-If everything goes well, the last output looks like this.::
+If everything goes well, the output looks like this.::
 
    $ ./scripts/openstack_test.sh
    ...
@@ -319,9 +324,9 @@ If everything goes well, the last output looks like this.::
    +------------------+------------------------------------------------+
 
 Connect to the instance via provider network ip using ssh on the machine
-that has a provider network ip address.::
+that has a provider network access.::
 
-   (a node has provider ip) $ ssh cirros@192.168.22.195
+   (a node with provider network access) $ ssh cirros@192.168.22.195
    cirros@192.168.22.195's password: 
    $ ip address show dev eth0
    2: eth0:<BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast qlen 1000
@@ -333,4 +338,5 @@ that has a provider network ip address.::
 
 Password is the default cirros password (hint: password seems to be created
 by someone who loves baseball, I think.)
+
 

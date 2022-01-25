@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -f .vaultpass ]; then
-	echo ".vaultpass exists. Remove it first."
+	echo "Error) .vaultpass file exists. Remove it first."
 	exit 1
 fi
 VAULTFILE="inventory/${MYSITE}/group_vars/all/vault.yml"

@@ -150,12 +150,16 @@ Create and update ansible.cfg.::
 
    $ sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
 
-Create a vault file for user and openstack admin password.::
+Create a vault file for several passwords.::
 
    $ ./vault.sh
    user password: 
    openstack admin password: 
    Encryption successful
+
+Caveat) If you already ran a playbook, never run vault.sh script again.
+Then, the passwords are newly created again so it will not match with the
+already deployed passwords.
 
 Edit group_vars/all/vars.yml for your environment.::
 

@@ -1,20 +1,20 @@
-pbos-ansible
-================
+pbos-ansible offline
+=====================
 
-This is a guide to install OpenStack on pure baremetal using ansible playbook.
+This is a guide to install OpenStack on pure baremetal using ansible playbook
+in offline environment.
 
-If you want to install PBOS in offline environment, read README-offline.rst.
+Use PBOS CD/ISO to install PBOS in offline.
 
 Supported OS
 ----------------
 
-* Debian 11 (bullseye): Not maintained
-* Ubuntu 20.04 (focal): Not maintained
 * Rocky Linux 8.x: Only supported OS currently
 
 Assumptions
 -------------
 
+* All nodes are installed using PBOS CD/ISO.
 * The first node in controller group is the ansible deployer.
 * Ansible user in every node has a sudo privilege.
   If the sudo privilege without NOPASSWD, 
@@ -37,24 +37,23 @@ Assumptions
     - controller: openstack controller and ceph mon/mgr/rgw
     - compute: openstack compute and ceph osd
 
-Install packages
-------------------------
+Set up ISO repo
+----------------
 
-For Debian/Ubuntu::
+Get PBOS ISO file.::
 
-   $ sudo apt update
-   $ sudo apt install -y python3-venv sshpass
+   $ curl -sLo pbos.iso http://<pbos_iso_url>/
 
-For Rocky Linux::
+Mount iso file.::
 
-   $ sudo dnf -y install epel-release
-   $ sudo dnf -y install python3 sshpass python3-cryptography
+   $ sudo mount -o loop,ro pbos-8.5.iso /mnt
 
-* python3 is required to run PBOS playbook so install it on all nodes.
-* sshpass is required for password-based ssh connection so install it 
-  on the deployer node.
-* python3-cryptography is required by ansible crypto collection so 
-  install it on the deployer node.
+Run python http server.::
+
+   $ cd /mnt
+   $ nohup python3 -m http.server --bind 192.168.21.171 8001 &
+   Serving HTTP on 192.168.21.171 port 8001 (http://192.168.21.171:8001/) ...
+
 
 Install ansible in virtual env
 ----------------------------------
@@ -67,11 +66,11 @@ Activate the virtual env.::
 
    $ source ~/.envs/pbos/bin/activate
 
-Install ansible.::
+Install python packages.::
 
-   $ python -m pip install -U pip
-   $ python -m pip install wheel
-   $ python -m pip install ansible==4.10.0 pymysql openstacksdk
+   (pbos)$ pip install --no-index --find-links /mnt/pip /mnt/pip/{pip,wheel}-*
+   (pbos)$ pip install --no-index --find-links /mnt/pip \
+               --requirement pip-requirements.txt
 
 Prepare
 ---------
@@ -169,10 +168,10 @@ Edit group_vars/all/vars.yml for your environment.::
    ---
    ## custom variables
    # set offline to true if there is no internet connection
-   offline: false
+   offline: true
    # set local repo url if offline is true
    # See https://github.com/iorchard/pbos_iso to set up local repo.
-   #local_repo_url: http://192.168.21.3:8000
+   local_repo_url: http://192.168.21.171:8001
    # keepalived on mgmt iface
    keepalived_interface: "eth1"
    keepalived_vip: "192.168.21.200"
@@ -221,8 +220,8 @@ Edit group_vars/all/vars.yml for your environment.::
    # Warn: Do not edit below if you are not an expert.  #
    ######################################################
 
-If there is no internet connection, offline variable should be set to true and
-you should set up a local repo.
+The offline variable should be set to true and you should set up 
+the local_repo_url variable.
 
 Check the connectivity to all nodes.::
 

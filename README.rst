@@ -166,6 +166,11 @@ Edit group_vars/all/vars.yml for your environment.::
    $ vi inventory/$MYSITE/group_vars/all/vars.yml
    ---
    ## custom variables
+   # set offline to true if there is no internet connection
+   offline: false
+   # set local repo url if offline is true
+   # See https://github.com/iorchard/pbos_iso to set up local repo.
+   #local_repo_url: http://192.168.21.3:8000
    # keepalived on mgmt iface
    keepalived_interface: "eth1"
    keepalived_vip: "192.168.21.200"
@@ -214,6 +219,8 @@ Edit group_vars/all/vars.yml for your environment.::
    # Warn: Do not edit below if you are not an expert.  #
    ######################################################
 
+If there is no internet connection, offline variable should be set to true and
+you should set up a local repo.
 
 Check the connectivity to all nodes.::
 

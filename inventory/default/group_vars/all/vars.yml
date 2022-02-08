@@ -1,5 +1,10 @@
 ---
 ## custom variables
+# set offline to true if there is no internet connection
+offline: false
+# set local repo url if offline is true
+# See https://github.com/iorchard/pbos_iso to set up local repo.
+#local_repo_url: http://192.168.21.3:8000
 # keepalived on mgmt iface
 keepalived_interface: "eth1"
 keepalived_vip: "192.168.21.210"

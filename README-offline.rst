@@ -75,6 +75,10 @@ Install python packages.::
 Prepare
 ---------
 
+Untar pbos-ansible tarball from the mounted iso.::
+
+   $ tar xvzf /mnt/pbos-ansible-<release_version>.tar.gz
+
 Go to pbos-ansible directory.::
 
    $ cd pbos-ansible
@@ -229,10 +233,6 @@ Check the connectivity to all nodes.::
 
 Run
 ----
-
-Get ansible roles.::
-
-   $ ansible-galaxy role install --force --role-file requirements.yml
 
 Run a playbook.::
 

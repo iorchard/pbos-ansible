@@ -40,13 +40,15 @@ Assumptions
 Set up ISO repo
 ----------------
 
-Get PBOS ISO file.::
+Mount iso.
 
-   $ curl -sLo pbos.iso http://<pbos_iso_url>/
+If you are using iso file,::
 
-Mount iso file.::
+   $ sudo mount -o loop,ro <path/to/pbos_iso_file> /mnt
 
-   $ sudo mount -o loop,ro pbos-8.5.iso /mnt
+If you are inserted CDROM,::
+
+    $ sudo mount -o ro /dev/sr0 /mnt
 
 Run python http server.::
 
@@ -57,6 +59,14 @@ Run python http server.::
 
 Install ansible in virtual env
 ----------------------------------
+
+Untar pbos-ansible tarball from the mounted iso.::
+
+   $ tar xvzf /mnt/pbos-ansible-<release_version>.tar.gz
+
+Go to pbos-ansible directory.::
+
+   $ cd pbos-ansible
 
 Create virtual env.::
 
@@ -74,14 +84,6 @@ Install python packages.::
 
 Prepare
 ---------
-
-Untar pbos-ansible tarball from the mounted iso.::
-
-   $ tar xvzf /mnt/pbos-ansible-<release_version>.tar.gz
-
-Go to pbos-ansible directory.::
-
-   $ cd pbos-ansible
 
 Copy default inventory and create hosts file for your environment.::
 

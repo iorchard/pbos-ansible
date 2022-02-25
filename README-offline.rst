@@ -284,15 +284,15 @@ Every service should be alive (:-)) and up.
 Horizon
 ----------
 
-The horizon dashboard listens on tcp 8000 on controller nodes.
+The horizon dashboard listens on tcp 8800 on controller nodes.
 
 Open your browser. 
 
 If keepalived_svc_vip is set, 
-go to http://<keepalived_vip_svc>:8000/dashboard/
+go to http://<keepalived_vip_svc>:8800/dashboard/
 
 If keepalived_svc_ip is not set,
-go to http://<keepalived_vip>:8000/dashboard/
+go to http://<keepalived_vip>:8800/dashboard/
 
 
 Test

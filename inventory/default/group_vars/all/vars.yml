@@ -1,7 +1,5 @@
 ---
 ## custom variables
-# set to true to install custom packages(qemu-cloudpc, cloudpc-libvirt-hooks)
-install_custom_pkgs: false
 # set offline to true if there is no internet connection
 offline: false
 # set local repo url if offline is true
@@ -93,7 +91,6 @@ rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
 
 # openstack common
 openstack_admin_password: "{{ vault_openstack_admin_password }}"
-openstack_repo_rpm: "https://repos.fedorapeople.org/repos/openstack/openstack-{{ openstack_release }}/rdo-release-{{ openstack_release }}-2.el8.noarch.rpm"
 
 # neutron
 metadata_secret: "{{ vault_metadata_secret }}"

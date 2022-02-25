@@ -50,6 +50,7 @@ For Rocky Linux::
    $ sudo dnf -y install epel-release
    $ sudo dnf -y install python3 sshpass python3-cryptography
 
+* epel-release is required to install some packages.
 * python3 is required to run PBOS playbook so install it on all nodes.
 * sshpass is required for password-based ssh connection so install it 
   on the deployer node.
@@ -172,7 +173,7 @@ Edit group_vars/all/vars.yml for your environment.::
    offline: false
    # set local repo url if offline is true
    # See https://github.com/iorchard/pbos_iso to set up local repo.
-   #local_repo_url: http://192.168.21.3:8000
+   #local_repo_url: http://192.168.21.3:8800
    # keepalived on mgmt iface
    keepalived_interface: "eth1"
    keepalived_vip: "192.168.21.200"
@@ -258,9 +259,6 @@ Check openstack services.::
 
     $ openstack service list
 
-There should be 8 services. - barbican, cinderv2, glance, cinderv3, neutron,
-nova, keystone, placement.
-
 Check openstack compute service.::
 
     $ openstack compute service list
@@ -283,15 +281,15 @@ Every service should be alive (:-)) and up.
 Horizon
 ----------
 
-The horizon dashboard listens on tcp 8000 on controller nodes.
+The horizon dashboard listens on tcp 8800 on controller nodes.
 
 Open your browser. 
 
 If keepalived_svc_vip is set, 
-go to http://<keepalived_vip_svc>:8000/dashboard/
+go to http://<keepalived_vip_svc>:8800/dashboard/
 
 If keepalived_svc_ip is not set,
-go to http://<keepalived_vip>:8000/dashboard/
+go to http://<keepalived_vip>:8800/dashboard/
 
 
 Test

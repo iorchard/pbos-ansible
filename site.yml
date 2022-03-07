@@ -94,4 +94,16 @@
   any_errors_fatal: true
   roles:
     - {role: pbos.barbican, tags: ['barbican', 'openstack']}
+
+- name: Deploy openstack orchestration service (heat)
+  hosts: heat
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.heat, tags: ['heat', 'openstack']}
+
+- name: Deploy openstack container-infra service (magnum)
+  hosts: magnum
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.magnum, tags: ['magnum', 'openstack']}
 ...

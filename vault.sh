@@ -22,6 +22,8 @@ CEPH_FSID=$(cat /proc/sys/kernel/random/uuid)
 NOVA_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 BARBICAN_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 BARBICAN_KEK=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 32)
+HEAT_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
+MAGNUM_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 
 echo "---" > $VAULTFILE
 echo "vault_ssh_password: '$USERPASS'" >> $VAULTFILE
@@ -41,6 +43,8 @@ echo "vault_ceph_fsid: '$CEPH_FSID'" >> $VAULTFILE
 echo "vault_nova_password: '$NOVA_PASS'" >> $VAULTFILE
 echo "vault_barbican_password: '$BARBICAN_PASS'" >> $VAULTFILE
 echo "vault_barbican_kek: '$BARBICAN_KEK'" >> $VAULTFILE
+echo "vault_heat_password: '$HEAT_PASS'" >> $VAULTFILE
+echo "vault_magnum_password: '$MAGNUM_PASS'" >> $VAULTFILE
 echo -n "..." >> $VAULTFILE
 head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8 > .vaultpass
 chmod 0400 .vaultpass

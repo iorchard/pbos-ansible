@@ -85,6 +85,8 @@ neutron_password: "{{ vault_neutron_password }}"
 cinder_password: "{{ vault_cinder_password }}"
 nova_password: "{{ vault_nova_password }}"
 barbican_password: "{{ vault_barbican_password }}"
+heat_password: "{{ vault_heat_password }}"
+magnum_password: "{{ vault_magnum_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"

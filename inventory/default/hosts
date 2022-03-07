@@ -37,6 +37,12 @@ controller
 [barbican:children]
 controller
 
+[heat:children]
+controller
+
+[magnum:children]
+controller
+
 [openstack:children]
 controller
 compute

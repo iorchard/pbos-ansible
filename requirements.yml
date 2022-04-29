@@ -8,7 +8,7 @@
 - src: https://github.com/iorchard/pbos.common
   version: 1.0.0
 - src: https://github.com/iorchard/pbos.glance
-  version: 1.0.1
+  version: 1.0.2
 - src: https://github.com/iorchard/pbos.haproxy
   version: 1.0.1
 - src: https://github.com/iorchard/pbos.horizon

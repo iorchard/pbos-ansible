@@ -99,11 +99,17 @@
   hosts: heat
   any_errors_fatal: true
   roles:
-    - {role: pbos.heat, tags: ['heat', 'openstack']}
+    - {role: pbos.heat, tags: ['heat', 'openstack-extra']}
 
 - name: Deploy openstack container-infra service (magnum)
   hosts: magnum
   any_errors_fatal: true
   roles:
-    - {role: pbos.magnum, tags: ['magnum', 'openstack']}
+    - {role: pbos.magnum, tags: ['magnum', 'openstack-extra']}
+
+- name: Deploy openstack LBaaS service (octavia)
+  hosts: octavia
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.octavia, tags: ['octavia', 'openstack-extra']}
 ...

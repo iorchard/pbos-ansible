@@ -43,6 +43,9 @@ controller
 [magnum:children]
 controller
 
+[octavia:children]
+controller
+
 [openstack:children]
 controller
 compute

@@ -183,7 +183,7 @@ Edit group_vars/all/vars.yml for your environment.::
    keepalived_vip_svc: "192.168.20.200"
    
    # openstack
-   openstack_release: "wallaby"
+   openstack_release: "yoga"
    
    # openstack mariadb
    openstack_mariadb_acl_cidr:

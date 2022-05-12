@@ -17,7 +17,7 @@ keepalived_vip_svc: "192.168.20.210"
 ntp_allowed_cidr: "192.168.21.0/24"
  
 # openstack
-openstack_release: "wallaby"
+openstack_release: "yoga"
 
 # openstack mariadb
 openstack_mariadb_acl_cidr:

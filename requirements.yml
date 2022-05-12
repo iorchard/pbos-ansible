@@ -11,11 +11,15 @@
   version: main
 - src: https://github.com/iorchard/pbos.haproxy
   version: main
+- src: https://github.com/iorchard/pbos.heat
+  version: main
 - src: https://github.com/iorchard/pbos.horizon
   version: main
 - src: https://github.com/iorchard/pbos.keepalived
   version: main
 - src: https://github.com/iorchard/pbos.keystone
+  version: main
+- src: https://github.com/iorchard/pbos.magnum
   version: main
 - src: https://github.com/iorchard/pbos.mariadb
   version: main
@@ -26,6 +30,8 @@
 - src: https://github.com/iorchard/pbos.nova
   version: main
 - src: https://github.com/iorchard/pbos.ntp
+  version: main
+- src: https://github.com/iorchard/pbos.octavia
   version: main
 - src: https://github.com/iorchard/pbos.placement
   version: main

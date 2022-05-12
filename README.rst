@@ -72,7 +72,7 @@ Install ansible.::
 
    $ python -m pip install -U pip
    $ python -m pip install wheel
-   $ python -m pip install ansible==4.10.0 pymysql openstacksdk
+   $ python -m pip install ansible==4.10.0 pymysql openstacksdk netaddr
 
 Prepare
 ---------

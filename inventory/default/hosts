@@ -1,16 +1,24 @@
-pbos-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex ansible_connection=local
-pbos-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
-pbos-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
-pbos-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=clex
-pbos-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=clex
-pbos-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=clex
+pbos-controller-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex ansible_connection=local
+pbos-controller-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
+pbos-controller-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
+pbos-compute-1 ansible_host=192.168.21.204 ansible_port=22 ansible_user=clex
+pbos-compute-2 ansible_host=192.168.21.205 ansible_port=22 ansible_user=clex
+pbos-storage-1 ansible_host=192.168.21.206 ansible_port=22 ansible_user=clex
+pbos-storage-2 ansible_host=192.168.21.207 ansible_port=22 ansible_user=clex
+pbos-storage-3 ansible_host=192.168.21.208 ansible_port=22 ansible_user=clex
+pbos-storage-4 ansible_host=192.168.21.209 ansible_port=22 ansible_user=clex
 
 [controller]
-pbos-[1:3]
+pbos-controller-[1:3]
 
 [compute]
-pbos-[4:6]
+pbos-compute-[1:2]
 
+[storage_controller]
+pbos-storage-[1:3]
+
+[storage]
+pbos-storage-[1:4]
 
 ###################################################
 ## Do not touch below if you are not an expert!!! #
@@ -51,16 +59,16 @@ controller
 compute
 
 [ceph_mon:children]
-controller
+storage_controller
 
 [ceph_mgr:children]
-controller
+storage_controller
+
+[ceph_osd:children]
+storage
 
 [ceph_rgw:children]
 controller
-
-[ceph_osd:children]
-compute
 
 [ceph:children]
 ceph_mon

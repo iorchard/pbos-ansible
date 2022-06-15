@@ -53,7 +53,7 @@ If you are inserted CDROM,::
 Run python http server.::
 
    $ cd /mnt
-   $ nohup python3 -m http.server --bind 192.168.21.171 8001 &
+   $ nohup python3 -m http.server --bind <management_ip> 8001 &
    Serving HTTP on 192.168.21.171 port 8001 (http://192.168.21.171:8001/) ...
 
 
@@ -62,11 +62,12 @@ Install ansible in virtual env
 
 Untar pbos-ansible tarball from the mounted iso.::
 
+   $ cd ~/
    $ tar xvzf /mnt/pbos-ansible-<release_version>.tar.gz
 
 Go to pbos-ansible directory.::
 
-   $ cd pbos-ansible
+   $ cd pbos-ansible-<release_version>
 
 Create virtual env.::
 
@@ -173,6 +174,8 @@ Edit group_vars/all/vars.yml for your environment.::
    $ vi inventory/$MYSITE/group_vars/all/vars.yml
    ---
    ## custom variables
+   # set to true to install custom packages(qemu-cloudpc, cloudpc-libvirt-hooks)
+   install_custom_pkgs: false
    # set offline to true if there is no internet connection
    offline: true
    # set local repo url if offline is true
@@ -226,8 +229,9 @@ Edit group_vars/all/vars.yml for your environment.::
    # Warn: Do not edit below if you are not an expert.  #
    ######################################################
 
-The offline variable should be set to true and you should set up 
-the local_repo_url variable.
+* install_custom_pkgs should be false.
+* The offline variable should be set to true.
+* Should set the local_repo_url variable to the right url.
 
 Check the connectivity to all nodes.::
 

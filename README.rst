@@ -48,10 +48,12 @@ For Debian/Ubuntu::
 For Rocky Linux::
 
    $ sudo dnf -y install epel-release
-   $ sudo dnf -y install python3 sshpass python3-cryptography
+   $ sudo dnf -y install python3 python39 sshpass python3-cryptography
 
 * epel-release is required to install some packages.
 * python3 is required to run PBOS playbook so install it on all nodes.
+* python39 is required for ansible environment so install it on the
+  deployer node.
 * sshpass is required for password-based ssh connection so install it 
   on the deployer node.
 * python3-cryptography is required by ansible crypto collection so 
@@ -62,7 +64,7 @@ Install ansible in virtual env
 
 Create virtual env.::
 
-   $ python3 -m venv ~/.envs/pbos
+   $ python3.9 -m venv ~/.envs/pbos
 
 Activate the virtual env.::
 
@@ -72,10 +74,15 @@ Install ansible.::
 
    $ python -m pip install -U pip
    $ python -m pip install wheel
-   $ python -m pip install ansible==4.10.0 pymysql openstacksdk netaddr
+   $ python -m pip install ansible pymysql openstacksdk netaddr
 
 Prepare
 ---------
+
+Put amphora image file in user's home directory.
+It is used by octavia role.::
+
+   $ curl -sLO http://192.168.151.110:8000/pbos/amphora-x64-haproxy.qcow2
 
 Go to pbos-ansible directory.::
 

@@ -24,6 +24,9 @@ openstack_mariadb_acl_cidr:
   - "localhost"
   - "192.168.21.0/255.255.255.0"
 
+# mariadb_ha_mode: multi-master, active-standby
+mariadb_ha_mode: 'active-standby'
+
 # storage
 # storage backends: ceph, lvm, or both
 # ceph for production, lvm for demo/test.

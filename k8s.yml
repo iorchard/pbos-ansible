@@ -1,0 +1,7 @@
+---
+- name: Deploy kubernetes cluster using magnum
+  hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.k8s, tags: ['k8s']}
+...

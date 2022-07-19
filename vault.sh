@@ -27,6 +27,7 @@ MAGNUM_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 OCTAVIA_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 OCTAVIA_CERTS_KEY_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 32)
 OCTAVIA_HEARTBEAT_KEY=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 32)
+DESIGNATE_PASS=$(head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8)
 
 echo "---" > $VAULTFILE
 echo "vault_ssh_password: '$USERPASS'" >> $VAULTFILE
@@ -51,6 +52,7 @@ echo "vault_magnum_password: '$MAGNUM_PASS'" >> $VAULTFILE
 echo "vault_octavia_password: '$OCTAVIA_PASS'" >> $VAULTFILE
 echo "vault_octavia_certs_key_passphrase: '$OCTAVIA_CERTS_KEY_PASS'" >> $VAULTFILE
 echo "vault_octavia_heartbeat_key: '$OCTAVIA_HEARTBEAT_KEY'" >> $VAULTFILE
+echo "vault_designate_password: '$DESIGNATE_PASS'" >> $VAULTFILE
 echo -n "..." >> $VAULTFILE
 head /dev/urandom |tr -dc A-Za-z0-9 |head -c 8 > .vaultpass
 chmod 0400 .vaultpass

@@ -94,6 +94,7 @@ magnum_password: "{{ vault_magnum_password }}"
 octavia_password: "{{ vault_octavia_password }}"
 octavia_certs_key_passphrase: "{{ vault_octavia_certs_key_passphrase }}"
 octavia_heartbeat_key: "{{ vault_octavia_heartbeat_key }}"
+designate_password: "{{ vault_designate_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"

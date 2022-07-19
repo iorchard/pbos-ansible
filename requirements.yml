@@ -37,3 +37,5 @@
   version: main
 - src: https://github.com/iorchard/pbos.rabbitmq
   version: main
+- src: https://github.com/iorchard/pbos.lightos
+  version: main

@@ -1,0 +1,7 @@
+---
+## LVM
+# loopback file path for LVM.
+loopback_file: "/pbos.lvm"
+# lvm size in GiB. 
+lvm_size: 50G
+...

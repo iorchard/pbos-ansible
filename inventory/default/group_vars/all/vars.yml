@@ -29,30 +29,20 @@ openstack_mariadb_acl_cidr:
 mariadb_ha_mode: 'multi-master'
 
 # storage
-# storage backends: ceph, lvm, or both
+# storage backends: ceph, lvm, lightos
 # ceph for production, lvm for demo/test.
 # Never use lvm for production since lvm creates and uses loopback device.
 # If there are multiple backends, the first one will be the default backend.
 storage_backends:
   - ceph
   - lvm
-## ceph
-ceph_public_network_iface: eth4
-ceph_rgw_service_iface: eth0
-ceph_public_network: 192.168.24.0/24
-ceph_cluster_network: 192.168.24.0/24
-ceph_replicas: 2
-ceph_mgr_pg_autoscaler: true
-ceph_osd_devices:
-  - /dev/sdb
-  - /dev/sdc
-  - /dev/sdd
+  - lightos
 
-## LVM
-# loopback file path for LVM.
-loopback_file: "/pbos.lvm"
-# lvm size in GiB. 
-lvm_size: 50G
+## ceph: set ceph configuration in ceph.yml
+
+## lvm: set lvm configuration in lvm.yml
+
+## lightos: set lightos configuration in lightos.yml
 
 # neutron
 provider_interface: "eth2"

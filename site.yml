@@ -3,13 +3,13 @@
   hosts: all
   any_errors_fatal: true
   roles:
-    - {role: pbos.common, tags: ['common', 'always']}
+    - {role: pbos.common, tags: ['common', 'prerequisite']}
 
 - name: Deploy time service (ntp)
   hosts: all
   any_errors_fatal: true
   roles:
-    - {role: pbos.ntp, tags: ['ntp', 'pbos-infra']}
+    - {role: pbos.ntp, tags: ['ntp', 'prerequisite']}
 
 - name: Deploy storage service (ceph)
   hosts: ceph
@@ -72,7 +72,7 @@
     - {role: pbos.neutron, tags: ['neutron', 'openstack']}
 
 - name: Deploy openstack volume service (cinder)
-  hosts: cinder
+  hosts: openstack
   any_errors_fatal: true
   roles:
     - {role: pbos.cinder, tags: ['cinder', 'openstack']}

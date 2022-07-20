@@ -7,6 +7,8 @@
   version: main
 - src: https://github.com/iorchard/pbos.common
   version: main
+- src: https://github.com/iorchard/pbos.designate
+  version: main
 - src: https://github.com/iorchard/pbos.glance
   version: main
 - src: https://github.com/iorchard/pbos.haproxy
@@ -18,6 +20,8 @@
 - src: https://github.com/iorchard/pbos.keepalived
   version: main
 - src: https://github.com/iorchard/pbos.keystone
+  version: main
+- src: https://github.com/iorchard/pbos.lightos
   version: main
 - src: https://github.com/iorchard/pbos.magnum
   version: main
@@ -36,6 +40,4 @@
 - src: https://github.com/iorchard/pbos.placement
   version: main
 - src: https://github.com/iorchard/pbos.rabbitmq
-  version: main
-- src: https://github.com/iorchard/pbos.lightos
   version: main

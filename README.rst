@@ -8,8 +8,6 @@ If you want to install PBOS in offline environment, read README-offline.rst.
 Supported OS
 ----------------
 
-* Debian 11 (bullseye): Not maintained
-* Ubuntu 20.04 (focal): Not maintained
 * Rocky Linux 8.x: Only supported OS currently
 
 Assumptions
@@ -25,25 +23,12 @@ Assumptions
 
     $ cat /etc/hosts
     127.0.0.1	localhost
-    192.168.21.201 pbos-0 # ROCKY Linux
-    192.168.21.202 pbos-1 # ROCKY Linux
-    192.168.21.203 pbos-2 # ROCKY Linux
-    192.168.21.204 pbos-3 # ROCKY Linux
-    192.168.21.205 pbos-4 # ROCKY Linux
-    192.168.21.206 pbos-5 # ROCKY Linux
-
-* ansible inventory groups
-
-    - controller: openstack controller and ceph mon/mgr/rgw
-    - compute: openstack compute and ceph osd
+    192.168.21.201 pbos-1 # ROCKY Linux
+    192.168.21.202 pbos-2 # ROCKY Linux
+    192.168.21.203 pbos-3 # ROCKY Linux
 
 Install packages
 ------------------------
-
-For Debian/Ubuntu::
-
-   $ sudo apt update
-   $ sudo apt install -y python3-venv sshpass
 
 For Rocky Linux::
 
@@ -74,7 +59,7 @@ Install ansible.::
 
    $ python -m pip install -U pip
    $ python -m pip install wheel
-   $ python -m pip install ansible pymysql openstacksdk netaddr
+   $ python -m pip install ansible==5.10.0 pymysql openstacksdk netaddr
 
 Prepare
 ---------
@@ -96,63 +81,16 @@ Copy default inventory and create hosts file for your environment.::
    pbos-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex ansible_connection=local
    pbos-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
    pbos-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
-   pbos-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=clex
-   pbos-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=clex
-   pbos-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=clex
    
    [controller]
    pbos-[1:3]
    
    [compute]
-   pbos-[4:6]
-   
+   pbos-[1:3]
    
    ###################################################
    ## Do not touch below if you are not an expert!!! #
    ###################################################
-   
-   [mariadb:children]
-   controller
-   
-   [rabbitmq:children]
-   controller
-   
-   [keystone:children]
-   controller
-   
-   [glance:children]
-   controller
-   
-   [placement:children]
-   controller
-   
-   [cinder:children]
-   controller
-   
-   [barbican:children]
-   controller
-   
-   [openstack:children]
-   controller
-   compute
-   
-   [ceph_mon:children]
-   controller
-   
-   [ceph_mgr:children]
-   controller
-   
-   [ceph_rgw:children]
-   controller
-   
-   [ceph_osd:children]
-   compute
-   
-   [ceph:children]
-   ceph_mon
-   ceph_mgr
-   ceph_rgw
-   ceph_osd
 
 Modify hostname, ip, port, and user for your environment.
 
@@ -196,31 +134,26 @@ Edit group_vars/all/vars.yml for your environment.::
    openstack_mariadb_acl_cidr:
      - "localhost"
      - "192.168.21.0/255.255.255.0"
+   # mariadb_ha_mode: multi-master(default), active-standby
+   # used by pbos.haproxy role
+   mariadb_ha_mode: 'multi-master'
    
    # storage
-   # storage backends: ceph, lvm, or both
+   # storage backends: ceph, lvm, lightos
    # ceph for production, lvm for demo/test.
    # Never use lvm for production since lvm creates and uses loopback device.
    # If there are multiple backends, the first one will be the default backend.
    storage_backends:
      - ceph
      - lvm
-   # ceph
-   ceph_public_network_iface: eth4
-   ceph_rgw_service_iface: eth0
-   ceph_public_network: 192.168.24.0/24
-   ceph_cluster_network: 192.168.24.0/24
-   ceph_replicas: 2
-   ceph_mgr_pg_autoscaler: true
-   ceph_osd_devices:
-     - /dev/sdb
-     - /dev/sdc
-     - /dev/sdd
+     - lightos
    
-   # lvm size in GiB. Should be set it less than / partition available size.
-   loopback_file: "/storage/pbos.lvm"
-   lvm_size: 50G
+   ## ceph: set ceph configuration in ceph.yml
    
+   ## lvm: set lvm configuration in lvm.yml
+   
+   ## lightos: set lightos configuration in lightos.yml
+    
    # neutron
    provider_interface: "eth2"
    overlay_interface: "eth3"
@@ -356,5 +289,4 @@ that has a provider network access.::
 
 Password is the default cirros password (hint: password seems to be created
 by someone who loves baseball, I think.)
-
 

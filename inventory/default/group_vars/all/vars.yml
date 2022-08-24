@@ -30,19 +30,17 @@ mariadb_ha_mode: 'multi-master'
 
 # storage
 # storage backends: ceph, lvm, lightos
-# ceph for production, lvm for demo/test.
-# Never use lvm for production since lvm creates and uses loopback device.
 # If there are multiple backends, the first one will be the default backend.
 storage_backends:
   - ceph
   - lvm
   - lightos
 
-## ceph: set ceph configuration in ceph.yml
+## ceph: set ceph configuration in group_vars/all/ceph.yml
 
-## lvm: set lvm configuration in lvm.yml
+## lvm: set lvm configuration in group_vars/all/lvm.yml
 
-## lightos: set lightos configuration in lightos.yml
+## lightos: set lightos configuration in group_vars/all/lightos.yml
 
 # neutron
 provider_interface: "eth2"

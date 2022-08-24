@@ -54,6 +54,9 @@ controller
 [octavia:children]
 controller
 
+[designate:children]
+controller
+
 [openstack:children]
 controller
 compute

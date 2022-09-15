@@ -75,11 +75,6 @@ fi
 echo "Done"
 
 echo "Creating image..."
-#IMG="/tmp/cirros.img"
-#if [ ! -f "$IMG" ]; then
-#    echo "cirros image($IMG) not found. Abort."
-#    exit 1
-#fi
 get_cirros_image
 if ! openstack image show cirros >/dev/null 2>&1; then
     openstack image create \

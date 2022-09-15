@@ -7,7 +7,10 @@ l_os=(
   [glance]=glance-api 
   [keystone]=keystone-manage 
   [neutron]=neutron-server 
-  [nova]=nova-manage)
+  [nova]=nova-manage
+  [heat]=heat-api
+  [magnum]=magnum-api
+  [octavia]=octavia-api)
 
 for k in "${!l_os[@]}"; do
   v=$(sudo ${l_os[$k]} --version 2>/dev/null)

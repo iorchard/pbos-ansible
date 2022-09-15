@@ -73,8 +73,13 @@ storage
 [ceph_rgw:children]
 controller
 
+[ceph_client:children]
+controller
+compute
+
 [ceph:children]
 ceph_mon
 ceph_mgr
-ceph_rgw
 ceph_osd
+ceph_rgw
+ceph_client

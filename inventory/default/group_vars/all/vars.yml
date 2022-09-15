@@ -13,6 +13,11 @@ keepalived_vip: "192.168.21.210"
 keepalived_interface_svc: "eth0"
 keepalived_vip_svc: "192.168.20.210"
 
+# common
+# deploy_ssh_key: (boolean) set true to create and deploy ssh keypair 
+# from the first controller to other nodes
+deploy_ssh_key: false
+
 # ntp
 ntp_allowed_cidr: "192.168.21.0/24"
  

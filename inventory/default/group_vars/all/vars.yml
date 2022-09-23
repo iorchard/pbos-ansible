@@ -53,16 +53,6 @@ storage_backends:
 provider_interface: "eth2"
 overlay_interface: "eth3"
 
-# CA cert
-# Set this to true to use the existing CA key and certificate
-skip_ca_cert_creation_tasks: false
-# Override tls_tmp_ca to the existing CA key and cert directory 
-#tls_tmp_ca: {
-#  key: "/path/to/ca-key.pem",
-#  crt: "/path/to/ca-cert.pem"
-#}
-
-
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
 ######################################################

@@ -27,15 +27,24 @@ Assumptions
     192.168.21.202 pbos-2 # ROCKY Linux
     192.168.21.203 pbos-3 # ROCKY Linux
 
+Networks
+-----------
+
+I assume there are 5 networks.
+
+* service network: Public service network (e.g. 192.168.20.0/24)
+* management network: Management and internal network (e.g. 192.168.21.0/24)
+* provider network: OpenStack provider network (e.g. 192.168.22.0/24)
+* overlay network: OpenStack overlay network (e.g. 192.168.23.0/24)
+* storage network: Ceph public/cluster network (e.g. 192.168.24.0/24)
+
 Install packages
 ------------------------
 
 For Rocky Linux::
 
-   $ sudo dnf -y install epel-release
    $ sudo dnf -y install python3 python39 sshpass python3-cryptography
 
-* epel-release is required to install some packages.
 * python3 is required to run PBOS playbook so install it on all nodes.
 * python39 is required for ansible environment so install it on the
   deployer node.
@@ -78,21 +87,39 @@ Copy default inventory and create hosts file for your environment.::
    $ export MYSITE="mysite" # put your site name
    $ cp -a inventory/default inventory/$MYSITE
    $ vi inventory/$MYSITE/hosts
-   pbos-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex ansible_connection=local
-   pbos-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
-   pbos-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
+   pbos-controller-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=clex 
+   ansible_connection=local
+   pbos-controller-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=clex
+   pbos-controller-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=clex
+   pbos-compute-1 ansible_host=192.168.21.204 ansible_port=22 ansible_user=clex
+   pbos-compute-2 ansible_host=192.168.21.205 ansible_port=22 ansible_user=clex
+   pbos-storage-1 ansible_host=192.168.21.206 ansible_port=22 ansible_user=clex
+   pbos-storage-2 ansible_host=192.168.21.207 ansible_port=22 ansible_user=clex
+   pbos-storage-3 ansible_host=192.168.21.208 ansible_port=22 ansible_user=clex
+   pbos-storage-4 ansible_host=192.168.21.209 ansible_port=22 ansible_user=clex
    
    [controller]
-   pbos-[1:3]
+   pbos-controller-[1:3]
    
    [compute]
-   pbos-[1:3]
+   pbos-compute-[1:2]
    
+   [storage_controller]
+   pbos-storage-[1:3]
+   
+   [storage]
+   pbos-storage-[1:4]
+
    ###################################################
    ## Do not touch below if you are not an expert!!! #
    ###################################################
 
 Modify hostname, ip, port, and user for your environment.
+
+* controller group: openstack controller nodes
+* compute group: openstack compute nodes
+* storage_controller group: ceph controller(mon, mgr) nodes
+* storage group: ceph osd nodes
 
 Create and update ansible.cfg.::
 
@@ -118,42 +145,49 @@ Edit group_vars/all/vars.yml for your environment.::
    offline: false
    # set local repo url if offline is true
    # See https://github.com/iorchard/pbos_iso to set up local repo.
-   #local_repo_url: http://192.168.21.3:8800
+   #local_repo_url: http://192.168.21.3:8000
    # keepalived on mgmt iface
    keepalived_interface: "eth1"
-   keepalived_vip: "192.168.21.200"
+   keepalived_vip: "192.168.21.210"
    # keepalived on service iface
    # if the default gateway is on service iface, we should set this variables.
    keepalived_interface_svc: "eth0"
-   keepalived_vip_svc: "192.168.20.200"
+   keepalived_vip_svc: "192.168.20.210"
    
-   # openstack
-   openstack_release: "yoga"
+   # common
+   # deploy_ssh_key: (boolean) set true to create and deploy ssh keypair 
+   # from the first controller to other nodes
+   deploy_ssh_key: false
    
+   # ntp
+   ntp_allowed_cidr: "192.168.21.0/24"
+    
    # openstack mariadb
    openstack_mariadb_acl_cidr:
      - "localhost"
      - "192.168.21.0/255.255.255.0"
-   # mariadb_ha_mode: multi-master(default), active-standby
-   # used by pbos.haproxy role
-   mariadb_ha_mode: 'multi-master'
+   
+   ## haproxy 
+   # ha_mode: multi-master is the default mode.
+   # set this to true if you want to use active-standby mode.
+   force_active_standby: false
+   # enable_public_svc: set to true for public service of mariadb, rabbitmq
+   enable_public_svc: true
    
    # storage
    # storage backends: ceph, lvm, lightos
-   # ceph for production, lvm for demo/test.
-   # Never use lvm for production since lvm creates and uses loopback device.
    # If there are multiple backends, the first one will be the default backend.
    storage_backends:
      - ceph
      - lvm
      - lightos
    
-   ## ceph: set ceph configuration in ceph.yml
+   ## ceph: set ceph configuration in group_vars/all/ceph.yml
    
-   ## lvm: set lvm configuration in lvm.yml
+   ## lvm: set lvm configuration in group_vars/all/lvm.yml
    
-   ## lightos: set lightos configuration in lightos.yml
-    
+   ## lightos: set lightos configuration in group_vars/all/lightos.yml
+   
    # neutron
    provider_interface: "eth2"
    overlay_interface: "eth3"
@@ -162,8 +196,22 @@ Edit group_vars/all/vars.yml for your environment.::
    # Warn: Do not edit below if you are not an expert.  #
    ######################################################
 
-If there is no internet connection, offline variable should be set to true and
-you should set up a local repo.
+* offline: set it to true if there is no internet connection
+* local_repo_url: local rpm package repo for offline installation
+* keepalived_interface: interface name on management network
+* keepalived_vip: Virtual IP address on management network 
+* keepalived_interface_svc: interface name on service network
+* keepalived_vip_svc: Virtual IP address on service network
+
+* deploy_ssh_key: create and deploy ssh keypair
+* ntp_allowed_cidr: add management network cidr
+* openstack_mariadb_acl_cidr: add management network cidr
+* force_active_standby: set this true for haproxy active-standby mode
+* enable_public_svc: expose mariadb/rabbitmq to the service network
+* storage_backends: ceph, lvm, and lightos are supported.
+  (set the configuration in each storage yaml file.)
+* provider_interface: openstack provider network interface name
+* overlay_interface: openstack overlay network interface name
 
 Check the connectivity to all nodes.::
 

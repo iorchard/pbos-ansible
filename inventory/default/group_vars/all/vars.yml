@@ -21,19 +21,17 @@ deploy_ssh_key: false
 # ntp
 ntp_allowed_cidr: "192.168.21.0/24"
  
-# openstack
-openstack_release: "yoga"
-
 # openstack mariadb
 openstack_mariadb_acl_cidr:
   - "localhost"
   - "192.168.21.0/255.255.255.0"
 
-## haproxy
-# mariadb_ha_mode: multi-master(default), active-standby
-mariadb_ha_mode: 'multi-master'
+## haproxy 
+# ha_mode: multi-master is the default mode.
+# set this to true if you want to use active-standby mode.
+force_active_standby: false
 # enable_public_svc: set to true for public service of mariadb, rabbitmq
-enable_public_svc: false
+enable_public_svc: true
 
 # storage
 # storage backends: ceph, lvm, lightos

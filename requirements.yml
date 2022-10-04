@@ -41,3 +41,5 @@
   version: main
 - src: https://github.com/iorchard/pbos.rabbitmq
   version: main
+- src: https://github.com/iorchard/pbos.redis
+  version: main

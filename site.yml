@@ -17,6 +17,12 @@
   roles:
     - {role: pbos.ceph, tags: ['ceph', 'pbos-storage']}
 
+- name: Deploy cache service (redis)
+  hosts: controller
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.redis, tags: ['redis', 'pbos-infra']}
+
 - name: Deploy cache service (memcached)
   hosts: controller
   any_errors_fatal: true

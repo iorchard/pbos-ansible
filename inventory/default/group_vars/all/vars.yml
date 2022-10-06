@@ -51,6 +51,11 @@ storage_backends:
 provider_interface: "eth2"
 overlay_interface: "eth3"
 
+# designate
+# Set dns_domain if you install designate.
+dns_domain: "pbos.local."
+
+
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
 ######################################################
